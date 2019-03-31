@@ -2,59 +2,65 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour
+{
 
     public GameObject teleport_left;
     public GameObject teleport_mid;
     public GameObject teleport_right;
-    public float movementSpeed = 5.0f; 
+    public float movementSpeed = 5.0f;
 
     private Rigidbody2D rb;
 
-    enum Side {
-        left, 
-        mid, 
+    enum Side
+    {
+        left,
+        mid,
         right
     }
 
-    enum State {
-        stopped, 
-        going_up, 
-        going_down
+    enum State
+    {
+        stopped,
+        going_up,
+        going_down,
+        cleaning_window
     }
 
     Side side;
-    State state; 
+    State state;
 
     private void Start()
     {
         side = Side.mid;
-        state = State.stopped; 
+        state = State.stopped;
         rb = GetComponent<Rigidbody2D>();
     }
 
-    void Update () {
+    void Update()
+    {
         print("State: " + state);
 
         //Controller LEFT - RIGHT
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            if(side == Side.mid)
+            if (side == Side.mid)
             {
                 ChangeSide(Side.left);
-            }else if(side == Side.right)
+            }
+            else if (side == Side.right)
             {
                 ChangeSide(Side.mid);
             }
-            
+
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            if(side == Side.left)
+            if (side == Side.left)
             {
                 ChangeSide(Side.mid);
             }
-            else if(side == Side.mid)
+            else if (side == Side.mid)
             {
                 ChangeSide(Side.right);
             }
@@ -64,9 +70,10 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetKey(KeyCode.UpArrow))
         {
             rb.velocity = Vector2.up * movementSpeed * Time.deltaTime;
-            state = State.going_up; 
+            state = State.going_up;
         }
-        else if (Input.GetKeyUp(KeyCode.UpArrow)) {
+        else if (Input.GetKeyUp(KeyCode.UpArrow))
+        {
             rb.velocity = Vector2.zero;
             state = State.stopped;
         }
@@ -76,8 +83,30 @@ public class PlayerController : MonoBehaviour {
             rb.velocity = Vector2.down * movementSpeed * Time.deltaTime;
             state = State.going_down;
         }
-        else if (Input.GetKeyUp(KeyCode.DownArrow)) {
+        else if (Input.GetKeyUp(KeyCode.DownArrow))
+        {
             rb.velocity = Vector2.zero;
+            state = State.stopped;
+        }
+
+        //Controller SAFE-UP (CAUGHT)
+        if (Input.GetKey(KeyCode.Space))
+        {
+            state = State.going_up;
+        }
+        else if (Input.GetKeyUp(KeyCode.Space))
+        {
+            state = State.stopped;
+        }
+
+        //Controller CLEAN-WINDOW
+
+        if (Input.GetKey(KeyCode.E))
+        {
+            state = State.cleaning_window;
+        }
+        else if (Input.GetKeyUp(KeyCode.E))
+        {
             state = State.stopped;
         }
     }
@@ -85,9 +114,10 @@ public class PlayerController : MonoBehaviour {
     void ChangeSide(Side newSide)
     {
 
-        switch (newSide) {
+        switch (newSide)
+        {
             case Side.left:
-                transform.position = teleport_left.transform.position; 
+                transform.position = teleport_left.transform.position;
                 break;
             case Side.mid:
                 transform.position = teleport_mid.transform.position;
@@ -99,6 +129,44 @@ public class PlayerController : MonoBehaviour {
 
         side = newSide;
         print("Se ha cambiado a: " + side);
+    }
+
+    public string GetState()
+    {
+        string stateString = "";
+
+        if (state == State.going_down)
+        {
+            stateString = "going_down";
+        }
+        else if (state == State.going_up)
+        {
+            stateString = "going_up";
+        }
+        else if (state == State.stopped)
+        {
+            stateString = "stopped";
+        }
+
+        return stateString;
+    }
+
+    private void CleanWindow()
+    {
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Window")
+        {
+            if (collision.gameObject.GetComponent<Window>() != null) {
+                if(state == State.cleaning_window)
+                {
+                    //TO DO: SI HAS PASADO MÁS DE 3 SEGUNDOS CON EL ESTADO DE CLEANING_WINDOW LA WINDOW PASA A ESTAR LIMPIA
+                }
+            }
+        }
     }
 
 }
