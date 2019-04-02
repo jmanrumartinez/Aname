@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public float movementSpeed = 5.0f;
 
     private Rigidbody2D rb;
+    private int score = 0; 
 
     enum Side
     {
@@ -24,7 +25,8 @@ public class PlayerController : MonoBehaviour
         stopped,
         going_up,
         going_down,
-        cleaning_window
+        cleaning_window,
+        game_over
     }
 
     Side side;
@@ -39,6 +41,13 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if(state != State.game_over)
+        {
+            CheckIfNotMoving(); //TEMPORAL
+        }
+        
+        CheckIfGameOver(); //TEMPORAL 
+
         print("State: " + state);
 
         //Controller LEFT - RIGHT
@@ -151,22 +160,64 @@ public class PlayerController : MonoBehaviour
         return stateString;
     }
 
-    private void CleanWindow()
-    {
+    float counter = 0.0f;
+    public float timeToCleanWindow = 2.0f;
 
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Window")
+        if (collision.gameObject.tag == "Window")
         {
-            if (collision.gameObject.GetComponent<Window>() != null) {
-                if(state == State.cleaning_window)
+            print("Ha colisionado con window");
+            if (collision.gameObject.GetComponent<Window>() != null)
+            {
+                if (state == State.cleaning_window)
                 {
-                    //TO DO: SI HAS PASADO MÁS DE 3 SEGUNDOS CON EL ESTADO DE CLEANING_WINDOW LA WINDOW PASA A ESTAR LIMPIA
+                    counter += Time.deltaTime;
+
+                    if (counter >= timeToCleanWindow)
+                    {
+                        collision.gameObject.GetComponent<Window>().ChangeToWindowCleared(this.gameObject);
+                        counter = 0.0f;
+                    }
                 }
             }
         }
     }
 
+    float counterStopped = 0.0f;
+    int maxSecondsStopped = 10; 
+
+    private void CheckIfNotMoving()
+    {
+        if(state == State.stopped)
+        {
+            counterStopped += Time.deltaTime;
+
+            if (counterStopped >= maxSecondsStopped) {
+                state = State.game_over; 
+            }
+        }
+    }
+
+    private void CheckIfGameOver()
+    {
+        if(state == State.game_over)
+        {
+            Time.timeScale = 0.0f; 
+        }
+    }
+
+    public int GetScore()
+    {
+        return score; 
+    }
+
+    public void SetScore(int newScore)
+    {
+        score = newScore; 
+    }
+
+    public void AddScore(int newScore) {
+        score += newScore; 
+    }
 }

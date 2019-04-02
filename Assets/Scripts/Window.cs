@@ -7,7 +7,8 @@ public class Window : MonoBehaviour
 
     public GameObject player;
     public Sprite cleanWindowSprite; 
-    public float windowSpeed = 5.0f; 
+    public float windowSpeed = 5.0f;
+    public int scoreWhenCleaned = 250; 
 
     private Rigidbody2D rb;
     private SpriteRenderer sr; 
@@ -70,13 +71,13 @@ public class Window : MonoBehaviour
         return stateString; 
     }
 
-    public void ChangeToWindowCleared()
+    public void ChangeToWindowCleared(GameObject player)
     {
-        if(state != State.clean)
+        if(state != State.clean && player.tag == "Player")
         {
-            //TO DO: SI HAS PASADO MÁS DE 3 SEGUNDOS CON EL ESTADO DE CLEANING_WINDOW LA WINDOW PASA A ESTAR LIMPIA
             sr.sprite = cleanWindowSprite;
             state = State.clean;
+            player.GetComponent<PlayerController>().AddScore(scoreWhenCleaned);
         }
     }
     

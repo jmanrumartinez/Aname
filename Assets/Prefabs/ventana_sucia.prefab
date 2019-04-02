@@ -60,8 +60,8 @@ Rigidbody2D:
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_SleepingMode: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!61 &61814895472909606
 BoxCollider2D:
@@ -100,8 +100,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  cleanWindowSprite: {fileID: 0}
+  cleanWindowSprite: {fileID: 21300000, guid: 7a1738f94995a5c4e8578c43d7ca50a7, type: 3}
   windowSpeed: 150
+  scoreWhenCleaned: 250
 --- !u!212 &212288943152969148
 SpriteRenderer:
   m_ObjectHideFlags: 1
