@@ -2,83 +2,75 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Window : MonoBehaviour
-{
+public class Window : MonoBehaviour {
 
     public GameObject player;
-    public Sprite cleanWindowSprite; 
-    public float windowSpeed = 5.0f;
-    public int scoreWhenCleaned = 250; 
+    public Sprite cleanWindowSprite;
+    public int scoreWhenCleaned = 250;
+    public GameObject generator; 
+    private WindowGenerator windowGenerator; 
 
     private Rigidbody2D rb;
-    private SpriteRenderer sr; 
+    private SpriteRenderer sr;
+    private float windowSpeed;
 
     enum State {
-        dirty, 
+        dirty,
         clean
     }
 
-    State state; 
+    State state;
 
-    private void Start()
-    {
+    private void Start() {
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.Find("player");
         sr = GetComponent<SpriteRenderer>();
+
+        generator = GameObject.Find("generators");
+        windowGenerator = generator.GetComponent<WindowGenerator>();
+
+        windowSpeed = windowGenerator.GetWindowSpeed();
     }
 
-    void Update()
-    {
-        if (player.GetComponent<PlayerController>() != null)
-        {
-            string playerState = player.GetComponent<PlayerController>().GetState();
-
-            if (playerState == "going_up")
-            {
-                rb.velocity = Vector2.down * windowSpeed * Time.deltaTime;
-            }
-            else if (playerState == "stopped" || playerState == "going_down")
-            {
-                rb.velocity = Vector2.zero; 
-            }
-        }
+    void Update() {
+        rb.velocity = Vector2.down * windowSpeed * Time.deltaTime;
     }
 
-    public void SetWindowSpeed(float newSpeed)
-    {
+    public void SetWindowSpeed(float newSpeed) {
         windowSpeed = newSpeed;
     }
 
-    public float GetWindowSpeed()
-    {
-        return windowSpeed; 
+    public float GetWindowSpeed() {
+        return windowSpeed;
     }
 
-    public string GetState()
-    {
+    public string GetState() {
         string stateString = "";
 
-        switch (state)
-        {
+        switch (state) {
             case State.clean:
                 stateString = "clean";
                 break;
             case State.dirty:
                 stateString = "dirty";
-                break; 
+                break;
         }
 
-        return stateString; 
+        return stateString;
     }
 
-    public void ChangeToWindowCleared(GameObject player)
-    {
-        if(state != State.clean && player.tag == "Player")
-        {
+    public void ChangeToWindowCleared(GameObject player) {
+        if (state != State.clean && player.tag == "Player") {
             sr.sprite = cleanWindowSprite;
             state = State.clean;
             player.GetComponent<PlayerController>().AddScore(scoreWhenCleaned);
         }
     }
-    
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+        if(collision.gameObject.tag == "WindowBorder") {
+            Destroy(this.gameObject);
+        }
+    }
+
 }

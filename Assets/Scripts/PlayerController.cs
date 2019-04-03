@@ -41,10 +41,10 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if(state != State.game_over)
-        {
-            CheckIfNotMoving(); //TEMPORAL
-        }
+        //if(state != State.game_over)
+        //{
+        //    CheckIfNotMoving(); //TEMPORAL
+        //}
         
         CheckIfGameOver(); //TEMPORAL 
 
@@ -161,6 +161,7 @@ public class PlayerController : MonoBehaviour
     }
 
     float counter = 0.0f;
+    float counterGiveScore = 0.0f;
     public float timeToCleanWindow = 2.0f;
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -173,14 +174,33 @@ public class PlayerController : MonoBehaviour
                 if (state == State.cleaning_window)
                 {
                     counter += Time.deltaTime;
+                    counterGiveScore += Time.deltaTime; 
+                    
 
                     if (counter >= timeToCleanWindow)
                     {
                         collision.gameObject.GetComponent<Window>().ChangeToWindowCleared(this.gameObject);
                         counter = 0.0f;
                     }
+
+                    if(counterGiveScore >= 0.5f) {
+                        AddScore(25);
+                        counterGiveScore = 0.0f;
+                    }
                 }
             }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision) {
+        if (collision.gameObject.tag == "Window") {
+            counter = 0.0f; //Reseteamos el counter al salir de la ventana       
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+        if(collision.gameObject.tag == "Enemy") {
+            state = State.game_over;
         }
     }
 
