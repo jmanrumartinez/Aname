@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
+    public GameObject floatingScore; 
 
     public GameObject teleport_left;
     public GameObject teleport_mid;
@@ -11,7 +13,9 @@ public class PlayerController : MonoBehaviour
     public float movementSpeed = 5.0f;
 
     private Rigidbody2D rb;
-    private int score = 0; 
+    private int score = 0;
+
+    public int scoreWhileCleaning = 25; 
 
     enum Side
     {
@@ -118,6 +122,11 @@ public class PlayerController : MonoBehaviour
         {
             state = State.stopped;
         }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 
     void ChangeSide(Side newSide)
@@ -156,6 +165,10 @@ public class PlayerController : MonoBehaviour
         {
             stateString = "stopped";
         }
+        else if (state == State.cleaning_window)
+        {
+            stateString = "cleaning_window";
+        }
 
         return stateString;
     }
@@ -175,7 +188,6 @@ public class PlayerController : MonoBehaviour
                 {
                     counter += Time.deltaTime;
                     counterGiveScore += Time.deltaTime; 
-                    
 
                     if (counter >= timeToCleanWindow)
                     {
@@ -184,12 +196,18 @@ public class PlayerController : MonoBehaviour
                     }
 
                     if(counterGiveScore >= 0.5f) {
-                        AddScore(25);
+                        AddScore(scoreWhileCleaning);
+                        ShowFloatingScore();
                         counterGiveScore = 0.0f;
                     }
                 }
             }
         }
+    }
+
+    private void ShowFloatingScore()
+    {
+        Instantiate(floatingScore, transform.position, Quaternion.identity, transform);
     }
 
     private void OnTriggerExit2D(Collider2D collision) {
@@ -239,5 +257,10 @@ public class PlayerController : MonoBehaviour
 
     public void AddScore(int newScore) {
         score += newScore; 
+    }
+
+    public int GetScoreWhileCleaning()
+    {
+        return scoreWhileCleaning;
     }
 }
