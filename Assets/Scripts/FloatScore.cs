@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class FloatScore : MonoBehaviour {
 
-    private Vector3 offset = new Vector3(1.0f, 3.5f, 0.0f);
-    private Vector3 randomizePos = new Vector3(0.5f, 0.0f, 0.0f);
-
+    //  Public variables
     public float secondsToDisappear = 0.5f;
+
+    //  Private variables
+    //private Vector3 offset = new Vector3(1.0f, 3.5f, 0.0f);
+    private Vector3 offset = new Vector3(0.08f, 0.8f, 0.0f);
+    private Vector3 randomizePos = new Vector3(0.5f, 0.0f, 0.0f);
     private GameObject player; 
 
-	// Use this for initialization
-	void Start () {
+    //  Private methods
+	private void Start () {
         player = GameObject.Find("player");
         GetComponent<TextMesh>().text = player.GetComponent<PlayerController>().GetScoreWhileCleaning().ToString();
 

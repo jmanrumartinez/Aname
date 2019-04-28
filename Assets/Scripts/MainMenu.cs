@@ -3,24 +3,26 @@
     using UnityEngine;
     using UnityEngine.SceneManagement;
 
-    public class MainMenu : MonoBehaviour
-    {
+    public class MainMenu : MonoBehaviour{
 
-        public GameObject mainMenuCanvas;
-        public GameObject creditsCanvas;
-        public GameObject settingsCanvas;
-        public GameObject backButton; 
+    enum Panel {
+        mainmenu,
+        play,
+        credits,
+        settings,
+        twitter
+    }
 
-        enum Panel{
-            mainmenu, 
-            play, 
-            credits, 
-            settings, 
-            twitter
-        }
+    //  Public variables
+    public GameObject mainMenuCanvas;
+    public GameObject creditsCanvas;
+    public GameObject settingsCanvas;
+    public GameObject backButton;
 
-    Panel panelPos = Panel.mainmenu;
+    //  Private variables
+    private Panel panelPos = Panel.mainmenu;
 
+    //  Private methods
 	private void Update()
     	{
             switch(panelPos){
