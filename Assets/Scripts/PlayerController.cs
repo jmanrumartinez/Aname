@@ -53,11 +53,6 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Update() {
-        //if(state != State.game_over)
-        //{
-        //    CheckIfNotMoving(); //TEMPORAL
-        //}
-
         CheckIfGameOver(); //TEMPORAL 
 
         print("State: " + state);
@@ -143,10 +138,11 @@ public class PlayerController : MonoBehaviour {
 
                     if (counter >= timeToCleanWindow) {
                         collision.gameObject.GetComponent<Window>().ChangeToWindowCleared(this.gameObject);
+                        //TO DO: El feedback de "Cleaned!" cuando se haya limpiado una ventana por completo
                         counter = 0.0f;
                     }
 
-                    if (counterGiveScore >= 0.5f) {
+                    if (counterGiveScore >= 0.8f) {
                         AddScore(scoreWhileCleaning);
                         ShowFloatingScore();
                         counterGiveScore = 0.0f;
@@ -169,16 +165,6 @@ public class PlayerController : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.tag == "Enemy") {
             state = State.game_over;
-        }
-    }
-
-    private void CheckIfNotMoving() {
-        if (state == State.stopped) {
-            counterStopped += Time.deltaTime;
-
-            if (counterStopped >= maxSecondsStopped) {
-                state = State.game_over;
-            }
         }
     }
 

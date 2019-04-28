@@ -8,8 +8,7 @@ public class FloatScore : MonoBehaviour {
     public float secondsToDisappear = 0.5f;
 
     //  Private variables
-    //private Vector3 offset = new Vector3(1.0f, 3.5f, 0.0f);
-    private Vector3 offset = new Vector3(0.08f, 0.8f, 0.0f);
+    private Vector3 offset = new Vector3(1.0f, 3.5f, 0.0f);
     private Vector3 randomizePos = new Vector3(0.5f, 0.0f, 0.0f);
     private GameObject player; 
 
@@ -22,7 +21,7 @@ public class FloatScore : MonoBehaviour {
         transform.position += new Vector3(Random.Range(-randomizePos.x, randomizePos.x), Random.Range(-randomizePos.y, randomizePos.y), Random.Range(-randomizePos.z, randomizePos.z));
 
         Destroy(this.gameObject, secondsToDisappear);
-	}
+    }
 
     private void Update()
     {
