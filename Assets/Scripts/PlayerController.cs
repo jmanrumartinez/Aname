@@ -27,6 +27,9 @@ public class PlayerController : MonoBehaviour {
     public GameObject teleport_mid;
     public GameObject teleport_right;
 
+    [Header("Canvas GameObject")]
+    public GameObject gameOverCanvas; 
+
     //  Public variables 
     public float movementSpeed = 5.0f;
     public int scoreWhileCleaning = 25;
@@ -47,6 +50,7 @@ public class PlayerController : MonoBehaviour {
     
     //  Private methods
     private void Start() {
+        Time.timeScale = 1.0f;
         side = Side.mid;
         state = State.stopped;
         rb = GetComponent<Rigidbody2D>();
@@ -171,6 +175,8 @@ public class PlayerController : MonoBehaviour {
     private void CheckIfGameOver() {
         if (state == State.game_over) {
             Time.timeScale = 0.0f;
+            GetComponent<AudioSource>().Stop();
+            gameOverCanvas.SetActive(true);
         }
     }
 

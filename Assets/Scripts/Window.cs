@@ -8,7 +8,9 @@ public class Window : MonoBehaviour {
     public Sprite cleanWindowSprite;
     public int scoreWhenCleaned = 250;
     public GameObject generator; 
-    private WindowGenerator windowGenerator; 
+    private WindowGenerator windowGenerator;
+    public AudioSource audioSource;
+    public AudioClip clipWhenCleaned; 
 
     private Rigidbody2D rb;
     private SpriteRenderer sr;
@@ -64,6 +66,7 @@ public class Window : MonoBehaviour {
             sr.sprite = cleanWindowSprite;
             state = State.clean;
             player.GetComponent<PlayerController>().AddScore(scoreWhenCleaned);
+            audioSource.PlayOneShot(clipWhenCleaned, 1.0F);
         }
     }
 
