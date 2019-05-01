@@ -39,7 +39,7 @@ public class GameController : MonoBehaviour {
 
         if (secondsCounter >= secondsScore)
         {
-            playerController.AddScore(scoreProfit * multiplicador);
+            playerController.AddScore(scoreProfit);
             secondsCounter = 0.0f;
         }
         //END TEMPORAL

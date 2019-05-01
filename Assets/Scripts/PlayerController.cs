@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour {
         right
     }
 
-    private enum State {
+    public enum State {
         stopped,
         going_up,
         going_down,
@@ -47,7 +47,9 @@ public class PlayerController : MonoBehaviour {
 
     private float counterStopped = 0.0f;
     private int maxSecondsStopped = 10;
-    
+
+    private float lockPos = 0.0f; 
+
     //  Private methods
     private void Start() {
         Time.timeScale = 1.0f;
@@ -57,6 +59,8 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Update() {
+        transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, lockPos, lockPos); //Bloqueamos la rotación del player
+
         CheckIfGameOver(); //TEMPORAL 
 
         print("State: " + state);
@@ -102,7 +106,6 @@ public class PlayerController : MonoBehaviour {
         }
 
         //Controller CLEAN-WINDOW
-
         if (Input.GetKey(KeyCode.E)) {
             state = State.cleaning_window;
         } else if (Input.GetKeyUp(KeyCode.E)) {
@@ -177,6 +180,15 @@ public class PlayerController : MonoBehaviour {
             Time.timeScale = 0.0f;
             GetComponent<AudioSource>().Stop();
             gameOverCanvas.SetActive(true);
+
+            if (PlayerPrefs.HasKey("highScore")) {
+                if (GetScore() > PlayerPrefs.GetInt("highScore")) {
+                    PlayerPrefs.SetInt("highScore", GetScore());
+                }
+            } else {
+                PlayerPrefs.SetInt("highScore", GetScore());
+            }
+
         }
     }
 
@@ -211,5 +223,9 @@ public class PlayerController : MonoBehaviour {
 
     public int GetScoreWhileCleaning() {
         return scoreWhileCleaning;
+    }
+
+    public void SetState(State newState) {
+        state = newState; 
     }
 }

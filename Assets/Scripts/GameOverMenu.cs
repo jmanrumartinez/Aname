@@ -7,10 +7,12 @@ using UnityEngine.UI;
 public class GameOverMenu : MonoBehaviour {
 
     public Text yourScore;
+    public Text yourHighScore; 
     public GameObject player; 
 
     private void Start() {
         yourScore.text = "Your score: " + player.GetComponent<PlayerController>().GetScore();
+        yourHighScore.text = "High score: " + PlayerPrefs.GetInt("highScore");
     }
 
     public void Restart() {

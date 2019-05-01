@@ -15,6 +15,7 @@ public class FloatScore : MonoBehaviour {
     //  Private methods
 	private void Start () {
         player = GameObject.Find("player");
+
         GetComponent<TextMesh>().text = player.GetComponent<PlayerController>().GetScoreWhileCleaning().ToString();
 
         transform.position += offset;
