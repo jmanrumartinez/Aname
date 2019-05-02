@@ -36,6 +36,8 @@ public class PlayerController : MonoBehaviour {
 
     public float timeToCleanWindow = 2.0f;
 
+    public AudioClip gameOverClip; 
+
     //  Private variables
     private Rigidbody2D rb;
     private int score = 0;
@@ -48,10 +50,13 @@ public class PlayerController : MonoBehaviour {
     private float counterStopped = 0.0f;
     private int maxSecondsStopped = 10;
 
-    private float lockPos = 0.0f; 
+    private float lockPos = 0.0f;
+
+    private bool playerOverWindow = false;
 
     //  Private methods
     private void Start() {
+        PlayerPrefs.SetInt("firstTime",0);
         Time.timeScale = 1.0f;
         side = Side.mid;
         state = State.stopped;
@@ -137,6 +142,7 @@ public class PlayerController : MonoBehaviour {
 
     private void OnTriggerStay2D(Collider2D collision) {
         if (collision.gameObject.tag == "Window") {
+            playerOverWindow = true; 
             print("Ha colisionado con window");
             if (collision.gameObject.GetComponent<Window>() != null) {
                 if (state == State.cleaning_window) {
@@ -165,7 +171,8 @@ public class PlayerController : MonoBehaviour {
 
     private void OnTriggerExit2D(Collider2D collision) {
         if (collision.gameObject.tag == "Window") {
-            counter = 0.0f; //Reseteamos el counter al salir de la ventana       
+            counter = 0.0f; //Reseteamos el counter al salir de la ventana   
+            playerOverWindow = false; 
         }
     }
 
@@ -180,6 +187,8 @@ public class PlayerController : MonoBehaviour {
             Time.timeScale = 0.0f;
             GetComponent<AudioSource>().Stop();
             gameOverCanvas.SetActive(true);
+            GetComponent<AudioSource>().PlayOneShot(gameOverClip);
+
 
             if (PlayerPrefs.HasKey("highScore")) {
                 if (GetScore() > PlayerPrefs.GetInt("highScore")) {
@@ -227,5 +236,9 @@ public class PlayerController : MonoBehaviour {
 
     public void SetState(State newState) {
         state = newState; 
+    }
+
+    public bool GetPlayerOverWindow() {
+        return playerOverWindow; 
     }
 }

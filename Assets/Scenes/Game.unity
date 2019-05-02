@@ -1105,6 +1105,11 @@ Prefab:
       propertyPath: scoreProfit
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 114309685547163014, guid: a8ba29e434ee1714191b7bd5ba3a8a71,
+        type: 2}
+      propertyPath: gameOverClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 8339e3a6f93ead94d9333f26a9aada52, type: 3}
     m_RemovedComponents:
     - {fileID: 61984586894233358, guid: a8ba29e434ee1714191b7bd5ba3a8a71, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: a8ba29e434ee1714191b7bd5ba3a8a71, type: 2}

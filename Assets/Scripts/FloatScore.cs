@@ -16,7 +16,9 @@ public class FloatScore : MonoBehaviour {
 	private void Start () {
         player = GameObject.Find("player");
 
-        GetComponent<TextMesh>().text = player.GetComponent<PlayerController>().GetScoreWhileCleaning().ToString();
+        int scoreWhileCleaning = player.GetComponent<PlayerController>().GetScoreWhileCleaning() * player.GetComponent<GameController>().GetMultiplier();
+
+        GetComponent<TextMesh>().text = scoreWhileCleaning.ToString();
 
         transform.position += offset;
         transform.position += new Vector3(Random.Range(-randomizePos.x, randomizePos.x), Random.Range(-randomizePos.y, randomizePos.y), Random.Range(-randomizePos.z, randomizePos.z));
@@ -26,6 +28,10 @@ public class FloatScore : MonoBehaviour {
 
     private void Update()
     {
+        if (!player.GetComponent<PlayerController>().GetPlayerOverWindow()) {
+            GetComponent<MeshRenderer>().enabled = false; 
+        }
+
         if(player.GetComponent<PlayerController>().GetState() != "cleaning_window")
         {
             Destroy(this.gameObject);

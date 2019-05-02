@@ -18,12 +18,19 @@
     public GameObject creditsCanvas;
     public GameObject settingsCanvas;
     public GameObject backButton;
+    public GameObject firstTime; 
 
     //  Private variables
     private Panel panelPos = Panel.mainmenu;
 
+    private void Start() {
+        if (!PlayerPrefs.HasKey("firstTime")){
+            firstTime.SetActive(true);
+        }
+    }
+
     //  Private methods
-	private void Update()
+    private void Update()
     	{
             switch(panelPos){
                 case Panel.play:
@@ -82,5 +89,9 @@
 
         public void Back(){
             panelPos = Panel.mainmenu;
+        }
+
+        public void CloseFirstTime() {
+            firstTime.SetActive(false);        
         }
     }

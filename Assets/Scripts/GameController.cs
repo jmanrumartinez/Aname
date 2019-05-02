@@ -104,4 +104,8 @@ public class GameController : MonoBehaviour {
             counterEnemyGenerator = 0.0f; 
         }
     }
+
+    public int GetMultiplier() {
+        return multiplicador; 
+    }
 }

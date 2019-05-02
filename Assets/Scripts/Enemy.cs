@@ -23,6 +23,10 @@ public class Enemy : MonoBehaviour {
     public GameObject generator_top_mid;
     public GameObject generator_top_right;
 
+    //Top-sprites
+    [Header("Top Sprites")]
+    public Sprite[] topSprites;
+
     enum InitialSide {
         left,
         right,
@@ -34,6 +38,8 @@ public class Enemy : MonoBehaviour {
 
 
     private void Start() {
+        GetComponent<SpriteRenderer>().enabled = false; //TEMPORAL, para arreglar el bug del fantasma para la entrega del pre-layer
+
         generator_left_top = GameObject.Find("generator_left_top");
         generator_left_mid = GameObject.Find("generator_left_mid");
         generator_left_bottom = GameObject.Find("generator_left_bottom");
@@ -72,6 +78,11 @@ public class Enemy : MonoBehaviour {
                 initialSide = InitialSide.top;
                 print("initialSide: " + initialSide);
 
+                int randSprite = Random.Range(0, topSprites.Length);
+                GetComponent<SpriteRenderer>().sprite = topSprites[randSprite];
+
+                movementSpeed += movementSpeed * Random.Range(0.2f, 0.6f); 
+
                 switch (randomPos) {
                     case 1:
                         rb.position = generator_top_left.transform.position;
@@ -104,8 +115,16 @@ public class Enemy : MonoBehaviour {
         }
     }
 
+    float counterToAppear = 0.0f; 
+
     private void Update() {
         Move();
+
+        counterToAppear += Time.deltaTime; 
+
+        if(counterToAppear >= 0.3f) {
+            GetComponent<SpriteRenderer>().enabled = true; 
+        }
     }
 
     private void Move() {
