@@ -56,3 +56,4 @@ public class WindowGenerator : MonoBehaviour {
         windowSpeed = newWindowSpeed; 
     }
 }
+    

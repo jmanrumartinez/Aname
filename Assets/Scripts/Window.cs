@@ -30,12 +30,12 @@ public class Window : MonoBehaviour {
 
         generator = GameObject.Find("generators");
         windowGenerator = generator.GetComponent<WindowGenerator>();
-
-        windowSpeed = windowGenerator.GetWindowSpeed();
     }
 
     void Update() {
-        rb.velocity = Vector2.down * windowSpeed * Time.deltaTime;
+        //rb.velocity = Vector2.down * windowSpeed * Time.deltaTime;
+        transform.Translate(0,windowSpeed*Time.deltaTime,0);
+        windowSpeed = windowGenerator.GetWindowSpeed();
     }
 
     public void SetWindowSpeed(float newSpeed) {

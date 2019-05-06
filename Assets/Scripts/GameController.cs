@@ -37,8 +37,7 @@ public class GameController : MonoBehaviour {
 
         ManageWindowSpeed();
 
-        if (secondsCounter >= secondsScore)
-        {
+        if (secondsCounter >= secondsScore){
             playerController.AddScore(scoreProfit);
             secondsCounter = 0.0f;
         }
@@ -75,8 +74,7 @@ public class GameController : MonoBehaviour {
         secondsCounterToIncrease += Time.deltaTime;
         print("secondsCounterToIncrease : " + secondsCounterToIncrease);
 
-        if (secondsCounterToIncrease >= secondsToEarnScore)
-        {
+        if (secondsCounterToIncrease >= secondsToEarnScore){
             scorePlayer += scoreToGain;
             secondsCounterToIncrease = 0.0f;
         }
@@ -88,7 +86,7 @@ public class GameController : MonoBehaviour {
         float windowSpeed = windowGenerator.GetWindowSpeed();
 
         if (counterToIncrementWindowSpeed >= secondsToIncrementWindows) {
-            windowGenerator.SetWindowSpeed(windowSpeed += 7.5f);
+            windowGenerator.SetWindowSpeed(windowSpeed += -0.12f);
             counterToIncrementWindowSpeed = 0.0f;
             print("Se ha cambiado la velocidad de las nuevas ventanas a: " + windowGenerator.GetWindowSpeed());
         }
@@ -97,8 +95,6 @@ public class GameController : MonoBehaviour {
     private float counterEnemyGenerator = 0.0f;
 
     private void GenerateEnemies() {
-        //counterEnemyGenerator += Time.deltaTime;
-
         if(counterEnemyGenerator >= Random.Range(5, 10)) {
             Instantiate(enemy);
             counterEnemyGenerator = 0.0f; 
