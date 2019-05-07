@@ -27,6 +27,9 @@ public class Enemy : MonoBehaviour {
     [Header("Top Sprites")]
     public Sprite[] topSprites;
 
+    //  Advisors
+    private GameObject[] advisors; 
+
     enum InitialSide {
         left,
         right,
@@ -34,8 +37,6 @@ public class Enemy : MonoBehaviour {
     }
 
     InitialSide initialSide;
-
-
 
     private void Start() {
         GetComponent<SpriteRenderer>().enabled = false; //TEMPORAL, para arreglar el bug del fantasma para la entrega del pre-layer
