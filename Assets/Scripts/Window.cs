@@ -12,7 +12,6 @@ public class Window : MonoBehaviour {
     public AudioSource audioSource;
     public AudioClip clipWhenCleaned; 
 
-    private Rigidbody2D rb;
     private SpriteRenderer sr;
     private float windowSpeed;
 
@@ -24,7 +23,6 @@ public class Window : MonoBehaviour {
     State state;
 
     private void Start() {
-        rb = GetComponent<Rigidbody2D>();
         player = GameObject.Find("player");
         sr = GetComponent<SpriteRenderer>();
 

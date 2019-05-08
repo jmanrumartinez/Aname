@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour {
 
     public Rigidbody2D rb;
-    public SpriteRenderer sr; 
+    public SpriteRenderer sr;
     public float movementSpeed = 5.0f;
 
     //Left generators
@@ -26,9 +26,6 @@ public class Enemy : MonoBehaviour {
     //Top-sprites
     [Header("Top Sprites")]
     public Sprite[] topSprites;
-
-    //  Advisors
-    private GameObject[] advisors; 
 
     enum InitialSide {
         left,
@@ -58,9 +55,12 @@ public class Enemy : MonoBehaviour {
         int randomSide = Random.Range(1, 4);
         int randomPos = Random.Range(1, 4);
 
+
+
         switch (randomSide) {
             case 1:
                 initialSide = InitialSide.left;
+                GameObject.Find("advisors").GetComponent<Advisors>().ShowAdvice(Advisors.Side.left);
                 print("initialSide: " + initialSide);
 
                 switch (randomPos) {
@@ -77,12 +77,13 @@ public class Enemy : MonoBehaviour {
                 break;
             case 2:
                 initialSide = InitialSide.top;
+                GameObject.Find("advisors").GetComponent<Advisors>().ShowAdvice(Advisors.Side.top);
                 print("initialSide: " + initialSide);
 
                 int randSprite = Random.Range(0, topSprites.Length);
                 GetComponent<SpriteRenderer>().sprite = topSprites[randSprite];
 
-                movementSpeed += movementSpeed * Random.Range(0.2f, 0.6f); 
+                movementSpeed += movementSpeed * Random.Range(0.2f, 0.6f);
 
                 switch (randomPos) {
                     case 1:
@@ -98,6 +99,7 @@ public class Enemy : MonoBehaviour {
                 break;
             case 3:
                 initialSide = InitialSide.right;
+                GameObject.Find("advisors").GetComponent<Advisors>().ShowAdvice(Advisors.Side.right);
                 sr.flipX = true;
                 print("initialSide: " + initialSide);
                 switch (randomPos) {
@@ -111,25 +113,25 @@ public class Enemy : MonoBehaviour {
                         rb.position = generator_right_bottom.transform.position;
                         break;
                 }
-                
+
                 break;
         }
     }
 
-    float counterToAppear = 0.0f; 
+    float counterToAppear = 0.0f;
 
     private void Update() {
         Move();
 
-        counterToAppear += Time.deltaTime; 
+        counterToAppear += Time.deltaTime;
 
-        if(counterToAppear >= 0.3f) {
-            GetComponent<SpriteRenderer>().enabled = true; 
+        if (counterToAppear >= 0.3f) {
+            GetComponent<SpriteRenderer>().enabled = true;
         }
     }
 
     private void Move() {
-        switch (initialSide){
+        switch (initialSide) {
             case InitialSide.left:
                 rb.velocity = Vector2.right * movementSpeed * Time.deltaTime;
                 break;
@@ -143,6 +145,6 @@ public class Enemy : MonoBehaviour {
     }
 
     public void SetMovementSpeed(float newMovementSpeed) {
-        movementSpeed = newMovementSpeed; 
+        movementSpeed = newMovementSpeed;
     }
 }

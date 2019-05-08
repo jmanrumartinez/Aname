@@ -11,15 +11,8 @@ public class Background : MonoBehaviour {
 
     //  Private variables
     private float windowSpeed = 0.0f;
-    private SpriteRenderer sr;
-    private Vector2 savedOffset;
 
     //  Private methods
-    private void Start() {
-        sr = GetComponent<SpriteRenderer>();
-        savedOffset = sr.material.mainTextureOffset;
-    }
-
     private void Update() {
         windowSpeed = windowGenerator.GetWindowSpeed();
         transform.Translate(0, windowSpeed * Time.deltaTime, 0);

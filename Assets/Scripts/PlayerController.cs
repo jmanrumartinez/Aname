@@ -47,9 +47,6 @@ public class PlayerController : MonoBehaviour {
     private float counter = 0.0f;
     private float counterGiveScore = 0.0f;
 
-    private float counterStopped = 0.0f;
-    private int maxSecondsStopped = 10;
-
     private float lockPos = 0.0f;
 
     private bool playerOverWindow = false;
