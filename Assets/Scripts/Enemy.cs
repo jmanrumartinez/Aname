@@ -42,11 +42,9 @@ public class Enemy : MonoBehaviour {
         generator_left_mid = GameObject.Find("generator_left_mid");
         generator_left_bottom = GameObject.Find("generator_left_bottom");
 
-
         generator_right_top = GameObject.Find("generator_right_top");
         generator_right_mid = GameObject.Find("generator_right_mid ");
         generator_right_bottom = GameObject.Find("generator_right_bottom");
-
 
         generator_top_left = GameObject.Find("generator_top_left");
         generator_top_mid = GameObject.Find("generator_top_mid");
@@ -54,8 +52,6 @@ public class Enemy : MonoBehaviour {
 
         int randomSide = Random.Range(1, 4);
         int randomPos = Random.Range(1, 4);
-
-
 
         switch (randomSide) {
             case 1:

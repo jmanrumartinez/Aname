@@ -12,8 +12,6 @@ public class Advisors : MonoBehaviour {
 
     Side side;
 
-    //  Private variables
-
     //  Public variables
     public GameObject[] advisors;
     public GameObject advicePrefab; 
