@@ -15,6 +15,10 @@ public class Window : MonoBehaviour {
     private SpriteRenderer sr;
     private float windowSpeed;
 
+    //  Outlets
+
+    public GameObject feedbackPrefab; 
+
     enum State {
         dirty,
         clean

@@ -201,6 +201,8 @@ MonoBehaviour:
   generator: {fileID: 0}
   audioSource: {fileID: 82133000884943680}
   clipWhenCleaned: {fileID: 8300000, guid: 2e2654d24b497bd47bda9d33bd8d60a3, type: 3}
+  feedbackPrefab: {fileID: 1839224988815824, guid: faf71cf879068044fb11f29a532bf51b,
+    type: 2}
 --- !u!212 &212086610085982852
 SpriteRenderer:
   m_ObjectHideFlags: 1
