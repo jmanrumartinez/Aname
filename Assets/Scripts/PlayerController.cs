@@ -36,8 +36,9 @@ public class PlayerController : MonoBehaviour {
 
     public float timeToCleanWindow = 2.0f;
 
-    public AudioClip gameOverClip; 
+    public AudioClip gameOverClip;
 
+    public Animator animator; 
     //  Private variables
     private Rigidbody2D rb;
     private int score = 0;
@@ -110,8 +111,10 @@ public class PlayerController : MonoBehaviour {
         //Controller CLEAN-WINDOW
         if (Input.GetKey(KeyCode.E)) {
             state = State.cleaning_window;
+            animator.SetBool("cleaning", true);
         } else if (Input.GetKeyUp(KeyCode.E)) {
             state = State.stopped;
+            animator.SetBool("cleaning", false);
         }
 
         if (Input.GetKeyDown(KeyCode.R)) {
