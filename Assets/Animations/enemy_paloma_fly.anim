@@ -5,7 +5,7 @@ AnimationClip:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: player_cleaning
+  m_Name: enemy_paloma_fly
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -19,11 +19,9 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: 136e78cd591b247459c3617778d0839e, type: 3}
+      value: {fileID: 21300000, guid: 78593b4255bb5874db87f96224948755, type: 3}
     - time: 0.083333336
-      value: {fileID: 21300002, guid: 136e78cd591b247459c3617778d0839e, type: 3}
-    - time: 0.16666667
-      value: {fileID: 21300004, guid: 136e78cd591b247459c3617778d0839e, type: 3}
+      value: {fileID: 21300002, guid: 78593b4255bb5874db87f96224948755, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -43,15 +41,14 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: 136e78cd591b247459c3617778d0839e, type: 3}
-    - {fileID: 21300002, guid: 136e78cd591b247459c3617778d0839e, type: 3}
-    - {fileID: 21300004, guid: 136e78cd591b247459c3617778d0839e, type: 3}
+    - {fileID: 21300000, guid: 78593b4255bb5874db87f96224948755, type: 3}
+    - {fileID: 21300002, guid: 78593b4255bb5874db87f96224948755, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.25
+    m_StopTime: 0.16666667
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

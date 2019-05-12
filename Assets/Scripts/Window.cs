@@ -69,6 +69,11 @@ public class Window : MonoBehaviour {
             state = State.clean;
             player.GetComponent<PlayerController>().AddScore(scoreWhenCleaned);
             audioSource.PlayOneShot(clipWhenCleaned, 1.0F);
+
+            //  Cuando el estado cambia a limpio, instanciamos el prefab feeback y le asignamos una posición con un offset. 
+            float offset = GetComponent<BoxCollider2D>().size.y / 2; 
+            GameObject feedback = Instantiate(feedbackPrefab, transform);
+            feedback.GetComponent<Transform>().localPosition = new Vector3(0.0f, offset + 1.0f,-1.0f);
         }
     }
 

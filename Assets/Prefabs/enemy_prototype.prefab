@@ -105,6 +105,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 5be151eac63354a44bd49078c8743a16, type: 3}
   - {fileID: 21300000, guid: c8a06bd16f9538a41b0577cee62f403b, type: 3}
   - {fileID: 21300000, guid: fab5f3bca49728449893e95b4ecc26e6, type: 3}
+  animatorControllerPaloma: {fileID: 9100000, guid: 24d3ba200033e4a40a5a04f4b5d35caf,
+    type: 2}
 --- !u!212 &212423050701329488
 SpriteRenderer:
   m_ObjectHideFlags: 1

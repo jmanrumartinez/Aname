@@ -27,6 +27,9 @@ public class Enemy : MonoBehaviour {
     [Header("Top Sprites")]
     public Sprite[] topSprites;
 
+    //Animation Controller Paloma
+    public RuntimeAnimatorController animatorControllerPaloma; 
+
     enum InitialSide {
         left,
         right,
@@ -57,6 +60,9 @@ public class Enemy : MonoBehaviour {
             case 1:
                 initialSide = InitialSide.left;
                 GameObject.Find("advisors").GetComponent<Advisors>().ShowAdvice(Advisors.Side.left);
+                Animator animatorLeft = gameObject.AddComponent(typeof(Animator)) as Animator;
+                animatorLeft.runtimeAnimatorController = animatorControllerPaloma; 
+
                 print("initialSide: " + initialSide);
 
                 switch (randomPos) {
@@ -96,6 +102,8 @@ public class Enemy : MonoBehaviour {
             case 3:
                 initialSide = InitialSide.right;
                 GameObject.Find("advisors").GetComponent<Advisors>().ShowAdvice(Advisors.Side.right);
+                Animator animatorRight = gameObject.AddComponent(typeof(Animator)) as Animator;
+                animatorRight.runtimeAnimatorController = animatorControllerPaloma;
                 sr.flipX = true;
                 print("initialSide: " + initialSide);
                 switch (randomPos) {
