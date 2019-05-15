@@ -10,7 +10,10 @@ public class Window : MonoBehaviour {
     public GameObject generator; 
     private WindowGenerator windowGenerator;
     public AudioSource audioSource;
-    public AudioClip clipWhenCleaned; 
+    public AudioClip clipWhenCleaned;
+
+    [Header("Player")]
+    public int scoreToDecrease = 100; 
 
     private SpriteRenderer sr;
     private float windowSpeed;
@@ -44,7 +47,7 @@ public class Window : MonoBehaviour {
         windowSpeed = newSpeed;
     }
 
-    public float GetWindowSpeed() {
+    public float GetWindowSpeed() {s
         return windowSpeed;
     }
 
@@ -79,6 +82,10 @@ public class Window : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if(collision.gameObject.tag == "WindowBorder") {
+            if (state.Equals(State.dirty)) {
+                player.GetComponent<PlayerController>().DecreaseScore(scoreToDecrease); 
+                //  TODO: Show increased score feedback canvas
+            }
             Destroy(this.gameObject);
         }
     }

@@ -1229,6 +1229,28 @@ Prefab:
       propertyPath: animator
       value: 
       objectReference: {fileID: 1929860451}
+    - target: {fileID: 114309685547163014, guid: a8ba29e434ee1714191b7bd5ba3a8a71,
+        type: 2}
+      propertyPath: particleSystem
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114309685547163014, guid: a8ba29e434ee1714191b7bd5ba3a8a71,
+        type: 2}
+      propertyPath: particleSystemGO
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114309685547163014, guid: a8ba29e434ee1714191b7bd5ba3a8a71,
+        type: 2}
+      propertyPath: smokeParticles
+      value: 
+      objectReference: {fileID: 1566539823522666, guid: 95e88d6d6dc6c6a4098c0eace7b754ba,
+        type: 2}
+    - target: {fileID: 114309685547163014, guid: a8ba29e434ee1714191b7bd5ba3a8a71,
+        type: 2}
+      propertyPath: burbujeo
+      value: 
+      objectReference: {fileID: 1317844654955932, guid: 8ea3c08b1078e704f8c8d5145e9a75ea,
+        type: 2}
     m_RemovedComponents:
     - {fileID: 61984586894233358, guid: a8ba29e434ee1714191b7bd5ba3a8a71, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: a8ba29e434ee1714191b7bd5ba3a8a71, type: 2}
