@@ -54,13 +54,14 @@ public class PlayerController : MonoBehaviour {
     private bool canMove = true;
 
     private float counter = 0.0f;
-    private float counterGiveScore = 0.0f;
 
     private float lockPos = 0.0f;
 
     private bool playerOverWindow = false;
 
     [Header("Game Over Particle")]
+    public GameObject bubblePoint; 
+
     private float counterGameOverParticle = 0.0f;
     private int instantiatedSmokes = 0;
 
@@ -130,7 +131,7 @@ public class PlayerController : MonoBehaviour {
             //Controller CLEAN-WINDOW
             if (Input.GetKeyDown(KeyCode.E)) { //Para volver a la versión donde limpiabas presionando la E quitar el "down"
                 state = State.cleaning_window;
-                Instantiate(burbujeo, transform);
+                Instantiate(burbujeo, bubblePoint.transform);   
 
                 if (playerOverWindow) {
                     counter++;
@@ -210,9 +211,12 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-
-    private void ShowFloatingScore() {
+    public void ShowFloatingScore() {
         Instantiate(floatingScore, transform.position, Quaternion.identity, transform);
+    }
+
+    public void SetNumToCleanWindow(int newNum) {
+        numToCleanWindow = newNum; 
     }
 
     private void OnTriggerExit2D(Collider2D collision) {
@@ -227,8 +231,6 @@ public class PlayerController : MonoBehaviour {
             state = State.game_over;
         }
     }
-
-
 
     private void InstantiateSmokeGameOver() {
         instantiatedSmokes++;
@@ -288,10 +290,6 @@ public class PlayerController : MonoBehaviour {
 
     public void SetScore(int newScore) {
         score = newScore;
-    }
-
-    public void SetNumToCleanWindow(int newNum) {
-        numToCleanWindow = newNum;  
     }
 
     public void AddScore(int newScore) {

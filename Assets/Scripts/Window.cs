@@ -18,6 +18,10 @@ public class Window : MonoBehaviour {
     private SpriteRenderer sr;
     private float windowSpeed;
 
+    //  Private variables
+
+    int numToClean = 0; 
+
     //  Outlets
 
     public GameObject feedbackPrefab; 
@@ -30,6 +34,7 @@ public class Window : MonoBehaviour {
     State state;
 
     private void Start() {
+        numToClean = Random.Range(5, 12);
         player = GameObject.Find("player");
         sr = GetComponent<SpriteRenderer>();
 
@@ -47,7 +52,7 @@ public class Window : MonoBehaviour {
         windowSpeed = newSpeed;
     }
 
-    public float GetWindowSpeed() {s
+    public float GetWindowSpeed() {
         return windowSpeed;
     }
 
@@ -83,11 +88,17 @@ public class Window : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision) {
         if(collision.gameObject.tag == "WindowBorder") {
             if (state.Equals(State.dirty)) {
-                player.GetComponent<PlayerController>().DecreaseScore(scoreToDecrease); 
-                //  TODO: Show increased score feedback canvas
+                player.GetComponent<PlayerController>().DecreaseScore(scoreToDecrease);
+                //  TODO: Show feedback decreased score
             }
             Destroy(this.gameObject);
         }
+
+        if (collision.gameObject.tag == "Player") {
+            player.GetComponent<PlayerController>().SetNumToCleanWindow(numToClean);
+        }
     }
+
+
 
 }

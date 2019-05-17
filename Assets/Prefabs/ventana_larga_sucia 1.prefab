@@ -97,7 +97,8 @@ AudioSource:
   m_GameObject: {fileID: 1231453881660668}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: a34c9f75561e151439c4497f739692d6,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -201,6 +202,7 @@ MonoBehaviour:
   generator: {fileID: 0}
   audioSource: {fileID: 82133000884943680}
   clipWhenCleaned: {fileID: 8300000, guid: 2e2654d24b497bd47bda9d33bd8d60a3, type: 3}
+  scoreToDecrease: 100
   feedbackPrefab: {fileID: 1839224988815824, guid: faf71cf879068044fb11f29a532bf51b,
     type: 2}
 --- !u!212 &212086610085982852
